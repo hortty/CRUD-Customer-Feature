@@ -1,0 +1,14 @@
+feature-webapp/node_modules/
+feature-webapp/dist/
+feature-webapp/out-tsc/
+feature-webapp/*.log
+feature-webapp/*.env
+
+feature-api/bin/
+feature-api/obj/
+feature-api/*.log
+feature-api/*.env
+
+*.log
+*.env
+docker-compose.override.yml

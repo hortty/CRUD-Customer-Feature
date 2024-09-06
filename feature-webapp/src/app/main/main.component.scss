@@ -1,0 +1,33 @@
+.container {
+  padding: 20px;
+}
+
+mat-form-field {
+  margin: 10px 0;
+}
+
+mat-table {
+  width: 100%;
+}
+
+mat-header-cell, mat-cell {
+  text-align: center;
+}
+
+mat-icon {
+  cursor: pointer;
+}
+
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-container {
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

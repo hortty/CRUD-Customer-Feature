@@ -1,0 +1,31 @@
+.container {
+    padding: 20px;
+}
+
+mat-form-field {
+    width: 100%;
+    margin: 10px 0;
+}
+
+button {
+    margin: 10px;
+}
+  
+.success-snackbar {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.error-snackbar {
+    background-color: #f44336;
+    color: #fff;
+}
+  
+.form-container {
+    max-width: 500px; 
+    margin: 120px auto; 
+    padding: 20px;
+    background-color: #f5f5f5; 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  }

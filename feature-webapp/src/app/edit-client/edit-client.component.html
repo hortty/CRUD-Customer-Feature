@@ -1,0 +1,91 @@
+<div class="form-container">
+<form [formGroup]="clientForm" (ngSubmit)="saveClient()">
+  <mat-progress-spinner *ngIf="isLoading" mode="indeterminate"></mat-progress-spinner>
+  <mat-form-field appearance="fill">
+    <mat-label>Nome do Cliente/Razão Social</mat-label>
+    <input matInput formControlName="name">
+    <mat-error *ngIf="hasError('name', 'required')">Campo obrigatório.</mat-error>
+    <mat-error *ngIf="hasError('name', 'maxlength')">Máximo de 150 caracteres.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>E-Mail</mat-label>
+    <input matInput formControlName="email">
+    <mat-error *ngIf="hasError('email', 'required')">Campo obrigatório.</mat-error>
+    <mat-error *ngIf="hasError('email', 'email')">Formato de e-mail inválido.</mat-error>
+    <mat-error *ngIf="hasError('email', 'maxlength')">Máximo de 150 caracteres.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Telefone</mat-label>
+    <input matInput formControlName="phone">
+    <mat-error *ngIf="hasError('phone', 'required')">Campo obrigatório.</mat-error>
+    <mat-error *ngIf="hasError('phone', 'maxlength')">Máximo de 11 caracteres.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Tipo de Pessoa</mat-label>
+    <mat-select formControlName="personType">
+      <mat-option value="Fisica">Fisica</mat-option>
+      <mat-option value="Juridica">Juridica</mat-option>
+    </mat-select>
+    <mat-error *ngIf="hasError('personType', 'required')">Tipo de Pessoa é obrigatório</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>CPF/CNPJ</mat-label>
+    <input matInput formControlName="cpfCnpj" [mask]="clientForm.get('personType') && clientForm.get('personType')?.value === 'Fisica' ? '000.000.000-00' : '00.000.000/0000-00'">
+    <mat-error *ngIf="hasError('cpfCnpj', 'required')">CPF/CNPJ é obrigatório</mat-error>
+  </mat-form-field>
+
+  <mat-checkbox formControlName="isExempt">Isento de Inscrição Estadual</mat-checkbox> 
+
+  <mat-form-field appearance="fill">
+    <mat-label>Inscrição Estadual</mat-label>
+    <input matInput formControlName="stateRegistration" mask="000.000.000-000" [disabled]="clientForm.get('isExempt') && clientForm.get('isExempt')?.value">
+    <mat-error *ngIf="hasError('stateRegistration', 'maxlength')">Inscrição Estadual pode ter no máximo 12 caracteres</mat-error>
+  </mat-form-field>
+
+  <ng-container *ngIf="clientForm.get('personType') && clientForm.get('personType')?.value === 'Fisica'">
+    <mat-form-field appearance="fill">
+      <mat-label>Gênero</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option value="Feminino">Feminino</mat-option>
+        <mat-option value="Masculino">Masculino</mat-option>
+        <mat-option value="Outro">Outro</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Data de Nascimento</mat-label>
+      <input matInput formControlName="birthDate" [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    
+  </ng-container>
+
+  <mat-checkbox formControlName="isBlocked">Bloqueado</mat-checkbox>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Senha</mat-label>
+    <input matInput formControlName="passwordHash" type="password">
+    <mat-error *ngIf="hasError('passwordHash', 'required')">Campo obrigatório.</mat-error>
+    <mat-error *ngIf="hasError('passwordHash', 'minlength')">Mínimo de 8 caracteres.</mat-error>
+    <mat-error *ngIf="hasError('passwordHash', 'maxlength')">Máximo de 15 caracteres.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Confirmação de Senha</mat-label>
+    <input matInput formControlName="confirmPassword" type="password">
+    <mat-error *ngIf="hasError('confirmPassword', 'required')">Campo obrigatório.</mat-error>
+    <mat-error *ngIf="hasError('confirmPassword', 'mismatch')">As senhas não conferem.</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">
+    {{ isEditMode ? 'Editar Cliente' : 'Adicionar Cliente' }}
+  </button>
+  <button mat-raised-button color="warn" (click)="navigateBack()">Cancelar</button>
+
+</form>
+</div>

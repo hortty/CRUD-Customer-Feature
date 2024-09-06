@@ -1,0 +1,40 @@
+CREATE TABLE IF NOT EXISTS public.customer
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 21 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+    name character varying(150) COLLATE pg_catalog."default" NOT NULL,
+    email character varying(150) COLLATE pg_catalog."default" NOT NULL,
+    phone character varying(11) COLLATE pg_catalog."default" NOT NULL,
+    registrationdate date DEFAULT CURRENT_TIMESTAMP,
+    isblocked boolean DEFAULT false,
+    persontype integer NOT NULL,
+    cpfcnpj character varying(14) COLLATE pg_catalog."default" NOT NULL,
+    stateregistration character varying(12) COLLATE pg_catalog."default",
+    isexempt boolean DEFAULT true,
+    gender integer,
+    birthdate date,
+    passwordhash character varying(15) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT customer_pkey PRIMARY KEY (id),
+    CONSTRAINT customer_email_key UNIQUE (email)
+);
+
+INSERT INTO public.customer (name, email, phone, persontype, cpfcnpj, stateregistration, birthdate, gender, passwordhash) VALUES
+('Ana Silva', 'ana.silva@example.com', '11987654321', 0, '12345678901', '', '1985-06-15', 0, 'as87rtr8'),
+('Carlos Pereira', 'carlos.pereira@example.com', '21987654321', 0, '23456789012', '', '1990-08-22', 1, 'as87rtr8'),
+('Fernanda Costa', 'fernanda.costa@example.com', '31987654321', 0, '34567890123', '', '1992-12-05', 0, 'as87rtr8'),
+('João Oliveira', 'joao.oliveira@example.com', '41987654321', 0, '45678901234', '', '1980-03-17', 1, 'as87rtr8'),
+('Mariana Almeida', 'mariana.almeida@example.com', '51987654321', 0, '56789012345', '', '1995-11-30', 0, 'as87rtr8'),
+('Empresa X Ltda', 'contato@empresax.com', '11345678901', 1, '12345678000195', '', NULL, NULL, 'as87rtr8'),
+('Grupo Y S.A.', 'info@grupoy.com', '22345678901', 1, '23456789000123', '', NULL, NULL, 'as87rtr8'),
+('Comércio Z Ltda', 'comercial@comercioz.com', '33345678901', 1, '34567890000112', '', NULL, NULL, 'as87rtr8'),
+('Corporacao W Ltda', 'support@corporacao.com', '44345678901', 1, '45678901000111', '', NULL, NULL, 'as87rtr8'),
+('Indústria V Ltda', 'atendimento@industria.com', '55345678901', 1, '56789012000110', '', NULL, NULL, 'as87rtr8'),
+('Lucas Martins', 'lucas.martins@example.com', '61987654321', 0, '67890123456', '', '1988-07-20', 1, 'as87rtr8'),
+('Juliana Santos', 'juliana.santos@example.com', '71987654321', 0, '78901234567', '', '1994-09-10', 0, 'as87rtr8'),
+('Renato Souza', 'renato.souza@example.com', '81987654321', 0, '89012345678', '', '1991-02-25', 1, 'as87rtr8'),
+('Tatiane Lima', 'tatiane.lima@example.com', '91987654321', 0, '90123456789', '', '1987-10-15', 0, 'as87rtr8'),
+('Victor Hugo', 'victor.hugo@example.com', '02987654321', 0, '01234567890', '', '1993-05-30', 1, 'as87rtr8'),
+('Serviços A Ltda', 'contact@servicosa.com', '66345678901', 1, '67890123000109', '', NULL, NULL, 'as87rtr8'),
+('Indústria B S.A.', 'contact@industriaB.com', '77345678901', 1, '78901234000108', '', NULL, NULL, 'as87rtr8'),
+('Tecnologia C Ltda', 'info@tecnologiac.com', '88345678901', 1, '89012345000107', '', NULL, NULL, 'as87rtr8'),
+('Logística D Ltda', 'support@logisticad.com', '99345678901', 1, '90123456000106', '', NULL, NULL, 'as87rtr8'),
+('Comércio E Ltda', 'info@comercioe.com', '00345678901', 1, '01234567000105', '', NULL, NULL, 'as87rtr8');

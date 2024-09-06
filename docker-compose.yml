@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+
+  backend:
+    build:
+      context: ./feature-api
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+    networks:
+      - app-network
+    depends_on:
+      - postgres
+
+  frontend:
+    build:
+      context: ./feature-webapp
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    networks:
+      - app-network
+    depends_on:
+      - backend
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: senhasegura
+      POSTGRES_DB: MarketDatabase
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+    volumes:
+      - ./setup.sql:/docker-entrypoint-initdb.d/setup.sql
+
+networks:
+  app-network:
+    driver: bridge
