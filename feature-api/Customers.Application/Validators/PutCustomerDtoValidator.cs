@@ -44,18 +44,10 @@ namespace Customers.Application.Validators
                 .When(model => model.PersonType == nameof(PersonType.Fisica))
                 .WithMessage("Data de Nascimento é obrigatória para pessoas físicas");
 
-            RuleFor(model => model.BirthDate)
-                .Empty().WithMessage("Data de Nascimento deve estar vazia para CNPJ")
-                .When(model => model.PersonType == nameof(PersonType.Juridica));
-
             RuleFor(model => model.Gender)
                 .NotEmpty().WithMessage("Gênero não pode estar vazio")
                 .When(model => model.PersonType == nameof(PersonType.Fisica))
                 .WithMessage("Gênero é obrigatório para pessoas físicas");
-
-            RuleFor(model => model.Gender)
-                .Empty().WithMessage("Gênero deve estar vazio para CNPJ")
-                .When(model => model.PersonType == nameof(PersonType.Juridica));
 
             RuleFor(model => model.PasswordHash)
                 .NotEmpty().WithMessage("Senha não pode estar vazia")
